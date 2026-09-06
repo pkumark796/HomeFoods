@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Box, Paper, TextField, IconButton, Button, List, ListItem, ListItemText, Avatar, Typography } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import { chatService } from '../services/api';
@@ -10,6 +10,11 @@ export default function ChatPage() {
   const [input, setInput] = useState('');
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const endRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   const start = async () => {
     const res = await chatService.startChat();
@@ -53,6 +58,7 @@ export default function ChatPage() {
               <ListItemText primary={m.text} secondary={m.sender === 'user' ? 'You' : 'Assistant'} />
             </ListItem>
           ))}
+          <div ref={endRef} />
         </List>
 
         <Box sx={{ display: 'flex', gap: 1 }}>

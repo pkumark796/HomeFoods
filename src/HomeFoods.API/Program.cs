@@ -4,6 +4,7 @@ using HomeFoods.Domain.Repositories;
 using HomeFoods.Infrastructure.Repositories;
 using HomeFoods.Application.Services;
 using HomeFoods.Infrastructure.Services;
+using HomeFoods.API.DependencyInjection;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +36,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Register services
 builder.Services.AddHttpClient<IPhonePeService, PhonePeService>();
 builder.Services.AddScoped<ICheckoutService, CheckoutService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+
+// Register AI related services (ChatService + runtime ChatClient construction)
+builder.Services.AddHomeFoodsAI(builder.Configuration);
 
 // Add CORS
 builder.Services.AddCors(options =>

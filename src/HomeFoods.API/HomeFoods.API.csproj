@@ -21,4 +21,8 @@
     <ProjectReference Include="..\HomeFoods.Infrastructure\HomeFoods.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>

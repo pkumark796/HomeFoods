@@ -4,6 +4,7 @@ import { CartProvider } from './context/CartContext';
 import theme from './theme';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import ChatWidget from './components/ChatWidget';
 import HomePage from './pages/HomePage';
 import CatalogPage from './pages/CatalogPage';
 import ProductDetailPage from './pages/ProductDetailPage';
@@ -32,6 +33,7 @@ function App() {
               </Routes>
             </Box>
             <Footer />
+            <ChatWidget />
           </Box>
         </Router>
       </CartProvider>
