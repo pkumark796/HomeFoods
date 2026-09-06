@@ -1,0 +1,11 @@
+﻿## Ignore build output folders for all projects
+**/bin/
+**/obj/
+
+## Ignore Visual Studio workspace folder
+.vs/
+
+## Optional: ignore generated NuGet packages and user-specific files
+*.nupkg
+*.user
+*.suo

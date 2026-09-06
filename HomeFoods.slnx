@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Project Path="src/HomeFoods.API/HomeFoods.API.csproj" />
+  <Project Path="src/HomeFoods.Application/HomeFoods.Application.csproj" />
+  <Project Path="src/HomeFoods.Client/HomeFoods.Client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="src/HomeFoods.Domain/HomeFoods.Domain.csproj" />
+  <Project Path="src/HomeFoods.Infrastructure/HomeFoods.Infrastructure.csproj" />
+</Solution>
