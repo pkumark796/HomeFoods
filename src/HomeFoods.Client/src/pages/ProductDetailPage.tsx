@@ -112,7 +112,7 @@ function ProductDetailPage() {
           </Typography>
 
           <Typography variant="subtitle1" color="text.secondary" sx={{ mb: 2 }}>
-            Brand: {product.brand.name}
+            Brand: {product.brand?.name ?? 'Unknown'}
           </Typography>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 2 }}>
@@ -137,7 +137,7 @@ function ProductDetailPage() {
 
           <Box sx={{ mb: 3 }}>
             <Chip
-              label={product.category.name}
+              label={product.category?.name ?? 'Uncategorized'}
               color="primary"
               variant="outlined"
               sx={{ mr: 1 }}

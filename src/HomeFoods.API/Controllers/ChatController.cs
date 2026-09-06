@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using HomeFoods.API.AITools;
-using OpenAI.Chat;
-using HomeFoods.Application.Services;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HomeFoods.API.Controllers
 {
@@ -11,13 +9,13 @@ namespace HomeFoods.API.Controllers
     [Route("api/[controller]")]
     public class ChatController : ControllerBase
     {
-        private readonly HomeFoods.API.AITools.ChatService _chatService;
+        private readonly ChatService _chatService;
 
-        public ChatController(HomeFoods.API.AITools.ChatService chatService)
+        public ChatController(ChatService chatService)
         {
             _chatService = chatService;
         }
-        // POST api/chat/start
+
         [HttpPost("start")]
         public IActionResult Start()
         {
@@ -25,13 +23,12 @@ namespace HomeFoods.API.Controllers
             return Ok(new { sessionId });
         }
 
-        public class MessageRequest
+        public sealed class MessageRequest
         {
-            public string SessionId { get; set; }
-            public string Message { get; set; }
+            public string SessionId { get; set; } = string.Empty;
+            public string Message { get; set; } = string.Empty;
         }
 
-        // POST api/chat/message
         [HttpPost("message")]
         public async Task<IActionResult> PostMessage([FromBody] MessageRequest request)
         {
@@ -51,7 +48,6 @@ namespace HomeFoods.API.Controllers
             }
             catch (Exception ex)
             {
-                // Log if you have logging; return generic error
                 return StatusCode(StatusCodes.Status500InternalServerError, new { error = "Chat service error" });
             }
         }

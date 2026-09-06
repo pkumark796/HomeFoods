@@ -18,8 +18,6 @@ export function EmptyState({
   actionLabel,
   onAction,
 }: EmptyStateProps) {
-  const navigate = useNavigate();
-
   return (
     <Box
       sx={{

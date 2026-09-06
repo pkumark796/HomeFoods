@@ -99,7 +99,7 @@ function CartPage() {
                           <Box>
                             <Typography variant="subtitle1">{item.product.name}</Typography>
                             <Typography variant="body2" color="text.secondary">
-                              {item.product.brand.name}
+                              {item.product.brand?.name ?? 'Unknown brand'}
                             </Typography>
                             <Typography variant="caption" color="text.secondary">
                               {item.product.weight} {item.product.unit}

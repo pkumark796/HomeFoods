@@ -56,7 +56,7 @@ export function FilterSidebar({
     onFilterChange({ ...filters, brandIds: newBrandIds });
   };
 
-  const handlePriceChange = (event: Event, newValue: number | number[]) => {
+  const handlePriceChange = (_event: Event, newValue: number | number[]) => {
     const [min, max] = newValue as number[];
     onFilterChange({ ...filters, minPrice: min, maxPrice: max });
   };

@@ -100,7 +100,7 @@ export function SearchBar({ onSearch, fullWidth = false }: SearchBarProps) {
         onChange={(e) => setSearchTerm(e.target.value)}
         onFocus={() => setShowSuggestions(true)}
         onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyPress}
         size="medium"
         InputProps={{
           startAdornment: (

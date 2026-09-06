@@ -8,7 +8,6 @@ import HeroBanner from '../components/HeroBanner';
 import CategoryGrid from '../components/CategoryGrid';
 import ProductCarousel from '../components/ProductCarousel';
 import LoadingState from '../components/LoadingState';
-import Footer from '../components/Footer';
 
 function HomePage() {
   const navigate = useNavigate();

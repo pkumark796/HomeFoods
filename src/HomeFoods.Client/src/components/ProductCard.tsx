@@ -1,5 +1,5 @@
 import { useState, type MouseEvent } from 'react';
-import { Card, CardMedia, CardContent, CardActions, Typography, Button, Box, Chip, IconButton, Tooltip } from '@mui/material';
+import { Card, CardMedia, CardContent, CardActions, Typography, Button, Box, Chip, IconButton } from '@mui/material';
 import { AddShoppingCart as AddShoppingCartIcon, Add as AddIcon, Remove as RemoveIcon, Favorite as FavoriteIcon, FavoriteBorder as FavoriteBorderIcon } from '@mui/icons-material';
 import { Product } from '../types';
 import { useCart } from '../context/CartContext';

@@ -10,23 +10,30 @@ import {
   InputLabel,
   Drawer,
   IconButton,
-  Button,
-  Chip,
 } from '@mui/material';
 import { FilterList as FilterListIcon, Close as CloseIcon } from '@mui/icons-material';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Product, Category, Brand } from '../types';
 import { productService, categoryService, brandService, ProductFilterParams, PaginatedResponse } from '../services/api';
 import ProductCard from '../components/ProductCard';
 import FilterSidebar, { FilterState } from '../components/FilterSidebar';
 import Breadcrumbs from '../components/Breadcrumbs';
 import Pagination from '../components/Pagination';
-import LoadingState, { LoadingCard } from '../components/LoadingState';
 import EmptyState from '../components/EmptyState';
+
+type SortBy = ProductFilterParams['sortBy'];
+
+const initialFilters: FilterState = {
+  categoryId: undefined,
+  brandIds: [],
+  minPrice: 0,
+  maxPrice: 1000,
+  minDiscount: 0,
+  inStock: false,
+};
 
 function CatalogPage() {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -40,15 +47,12 @@ function CatalogPage() {
   });
 
   const [filters, setFilters] = useState<FilterState>({
+    ...initialFilters,
     categoryId: searchParams.get('categoryId') || undefined,
-    brandIds: [],
-    minPrice: 0,
-    maxPrice: 1000,
     minDiscount: Number(searchParams.get('minDiscount')) || 0,
-    inStock: false,
   });
 
-  const [sortBy, setSortBy] = useState<string>('name');
+  const [sortBy, setSortBy] = useState<SortBy>('name');
   const [sortDescending, setSortDescending] = useState(false);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
@@ -82,7 +86,7 @@ function CatalogPage() {
           maxPrice: filters.maxPrice < 1000 ? filters.maxPrice : undefined,
           minDiscount: filters.minDiscount > 0 ? filters.minDiscount : undefined,
           inStock: filters.inStock || undefined,
-          sortBy: sortBy as any,
+          sortBy,
           sortDescending,
           pageNumber: pagination.pageNumber,
           pageSize: pagination.pageSize,
@@ -125,8 +129,8 @@ function CatalogPage() {
   };
 
   const handleSortChange = (value: string) => {
-    setSortBy(value);
-    setSortDescending(value === 'price' ? false : value === 'discount' ? true : false);
+    setSortBy(value as SortBy);
+    setSortDescending(value === 'discount');
   };
 
   const handlePageChange = (page: number) => {

@@ -1,5 +1,5 @@
 import { AppBar, Toolbar, Typography, IconButton, Badge, Box, Button, Container } from '@mui/material';
-import { ShoppingCart as ShoppingCartIcon, Home as HomeIcon, Storefront as StorefrontIcon } from '@mui/icons-material';
+import { ShoppingCart as ShoppingCartIcon, Storefront as StorefrontIcon } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import SearchBar from './SearchBar';

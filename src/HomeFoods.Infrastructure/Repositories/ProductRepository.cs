@@ -78,10 +78,23 @@ public class ProductRepository : IProductRepository
 
     public async Task<IEnumerable<Product>> SearchAsync(string searchTerm, CancellationToken cancellationToken = default)
     {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+            return new List<Product>();
+
+        var term = searchTerm.Trim().ToLower();
+        var termNoSpace = term.Replace(" ", string.Empty);
+
         return await _context.Products
             .Include(p => p.Category)
             .Include(p => p.Brand)
-            .Where(p => (p.Name.Contains(searchTerm) || p.Description.Contains(searchTerm)) && p.IsActive)
+            .Where(p => p.IsActive && (
+                (p.Name != null && (p.Name.ToLower().Contains(term) || p.Name.ToLower().Contains(termNoSpace))) ||
+                (p.Description != null && (p.Description.ToLower().Contains(term) || p.Description.ToLower().Contains(termNoSpace))) ||
+                (p.SKU != null && p.SKU.ToLower().Contains(term)) ||
+                (p.Category != null && p.Category.Name.ToLower().Contains(term)) ||
+                (p.Brand != null && p.Brand.Name.ToLower().Contains(term)) ||
+                (p.Unit != null && p.Unit.ToLower().Contains(term))
+            ))
             .ToListAsync(cancellationToken);
     }
 

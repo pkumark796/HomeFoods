@@ -12,6 +12,7 @@ export interface Product {
   isFeatured: boolean;
   imageUrl?: string;
   origin?: string;
+  expiryDate?: string;
   discountPercentage?: number;
   category?: Category;
   brand?: Brand;
